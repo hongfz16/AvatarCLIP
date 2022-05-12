@@ -1,0 +1,6 @@
+*.pth
+__pycache__
+exp
+smpl_models
+AvatarGen/ShapeGen/data
+AvatarGen/ShapeGen/output

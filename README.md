@@ -6,9 +6,9 @@
     <a href='https://hongfz16.github.io/' target='_blank'>Fangzhou Hong</a><sup>1</sup>*&emsp;
     Mingyuang Zhang<sup>1</sup>*&emsp;
     Liang Pan<sup>1</sup>&emsp;
-    <a href='https://caizhongang.github.io/'>Zhongang Cai</a><sup>1,2,3</sup>&emsp;
-    Lei Yang<sup>2</sup>&emsp;
-    <a href='https://liuziwei7.github.io/' target='_blank'>Ziwei Liu</a><sup>1✉</sup>
+    <a href='https://caizhongang.github.io/' target='_blank'>Zhongang Cai</a><sup>1,2,3</sup>&emsp;
+    <a href='https://yanglei.me/' target='_blank'>Lei Yang</a><sup>2</sup>&emsp;
+    <a href='https://liuziwei7.github.io/' target='_blank'>Ziwei Liu</a><sup>1+</sup>
 </div>
 <div>
     <sup>1</sup>S-Lab, Nanyang Technological University&emsp;
@@ -17,7 +17,7 @@
 </div>
 <div>
     *equal contribution&emsp;
-    <sup>✉</sup>corresponding author
+    <sup>+</sup>corresponding author
 </div>
 
 <strong>Accepted to <a href='https://s2022.siggraph.org/' target='_blank'>SIGGRAPH 2022</a> (Journal Track)</strong>
@@ -143,6 +143,8 @@ python render.py --coarse_shape_obj output/coarse_shape/a_3d_rendering_of_a_stro
 ```
 
 ### Shape Sculpting and Texture Generation
+
+Note that all the codes are tested on NVIDIA V100 (32GB memory). Therefore, in order to run on GPUs with lower memory, please try to scale down the network or tune down `max_ray_num` in the config files. You can refer to our colab demo for a scale-down version of AvatarCLIP.
 
 Folder `AvatarGen/AppearanceGen` contains codes for this part. We provide data, pretrained model and scripts to perform shape sculpting and texture generation on a zero-beta body (mean shape defined by SMPL). We provide many example scripts under `AvatarGen/AppearanceGen/confs/examples`. For example, if we want to generate 'Abraham Lincoln', which is defined in the config file `confs/examples/abrahamlincoln.conf`, use the following command.
 

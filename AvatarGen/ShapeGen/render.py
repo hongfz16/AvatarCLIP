@@ -142,7 +142,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--smpl_model_folder', type=str, default='../../smpl_models')
     parser.add_argument('--coarse_shape_obj', type=str, default=None)
-    parser.add_argument('--pose_type', type=str, choices=['stand_pose', 't_pose'], default='t_pose')
+    parser.add_argument('--pose_type', type=str, choices=['stand_pose', 't_pose'], default='stand_pose')
     parser.add_argument('--output_folder', type=str, default='./output/render')
     args = parser.parse_args()
 
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     
     if args.pose_type == 'stand_pose':
         with open('./output/stand_pose.npy', 'rb') as f:
-            pose = np.load(f, dtype=np.float32)
+            pose = np.load(f).astype(np.float32)
     elif args.pose_type == 't_pose':
         pose = np.zeros([1, 24, 3], dtype=np.float32)
         pose[:, 0, 0] = np.pi / 2

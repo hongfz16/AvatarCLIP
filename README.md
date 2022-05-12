@@ -3,12 +3,12 @@
 <h1>AvatarCLIP: Zero-Shot Text-Driven Generation and Animation of 3D Avatars</h1>
 
 <div>
-    <a href='https://hongfz16.github.io/' target='_blank'>Fangzhou Hong</a><sup>1</sup>&emsp;
-    Mingyuang Zhang<sup>1</sup>&emsp;
+    <a href='https://hongfz16.github.io/' target='_blank'>Fangzhou Hong</a><sup>1</sup>*&emsp;
+    Mingyuang Zhang<sup>1</sup>*&emsp;
     Liang Pan<sup>1</sup>&emsp;
     <a href='https://caizhongang.github.io/'>Zhongang Cai</a><sup>1,2,3</sup>&emsp;
     Lei Yang<sup>2</sup>&emsp;
-    <a href='https://liuziwei7.github.io/' target='_blank'>Ziwei Liu</a><sup>1+</sup>
+    <a href='https://liuziwei7.github.io/' target='_blank'>Ziwei Liu</a><sup>1✉</sup>
 </div>
 <div>
     <sup>1</sup>S-Lab, Nanyang Technological University&emsp;
@@ -17,7 +17,7 @@
 </div>
 <div>
     *equal contribution&emsp;
-    <sup>+</sup>corresponding author
+    <sup>✉</sup>corresponding author
 </div>
 
 <strong>Accepted to <a href='https://s2022.siggraph.org/' target='_blank'>SIGGRAPH 2022</a> (Journal Track)</strong>
@@ -33,10 +33,10 @@
     <td><img src="assets/tallandfat_ironman_running.gif" width="100%"/></td>
 </tr>
 <tr>
-    <td align='center' width='25%'>A <span style="color:#0a939d">tall and skinny</span> <span style="color:#EE9B00">female soldier</span> that is <span style="color:#AE2011">arguing</span>.</td>
-    <td align='center' width='25%'>A <span style="color:#0a939d">skinny</span> <span style="color:#EE9B00">ninja</span> that is <span style="color:#AE2011">raising both arms</span>.</td>
-    <td align='center' width='25%'>An <span style="color:#0a939d">overweight</span> <span style="color:#EE9B00">sumo wrestler</span> that is <span style="color:#AE2011">sitting</span>.</td>
-    <td align='center' width='25%'>A <span style="color:#0a939d">tall and fat</span> <span style="color:#EE9B00">Iron Man</span> that is <span style="color:#AE2011">running</span>.</td>
+    <td align='center' width='24%'>A <span style="color:#0a939d">tall and skinny</span> <span style="color:#EE9B00">female soldier</span> that is <span style="color:#AE2011">arguing</span>.</td>
+    <td align='center' width='24%'>A <span style="color:#0a939d">skinny</span> <span style="color:#EE9B00">ninja</span> that is <span style="color:#AE2011">raising both arms</span>.</td>
+    <td align='center' width='24%'>An <span style="color:#0a939d">overweight</span> <span style="color:#EE9B00">sumo wrestler</span> that is <span style="color:#AE2011">sitting</span>.</td>
+    <td align='center' width='24%'>A <span style="color:#0a939d">tall and fat</span> <span style="color:#EE9B00">Iron Man</span> that is <span style="color:#AE2011">running</span>.</td>
 <tr>
 </table>
 
@@ -60,7 +60,7 @@ If you find our work useful for your research, please consider citing the paper:
 ```
 
 ## Updates
-[05/2022] Support converting the generated avatar to the **animatable FBX format**! Go checkout [Avatar Gallery](https://hongfz16.github.io/projects/AvatarCLIP.html) to download the converted FBX models. Checkout the [instructions](./Avatar2FBX/README.md) for the usage.
+[05/2022] Support converting the generated avatar to the **animatable FBX format**! Go checkout [Avatar Gallery](https://hongfz16.github.io/projects/AvatarCLIP.html) to download the converted FBX models (Avatar Gallery -> load model -> Download FBX). Or checkout the [instructions](./Avatar2FBX/README.md) for the usage.
 
 [05/2022] Code release for avatar generation part!
 
@@ -105,7 +105,7 @@ Register and download SMPL models [here](https://smpl.is.tue.mpg.de/). Put the d
 ```
 
 ### Download Pretrained Models & Other Data
-Download the pretrained weights and other required data [here](). Put them in the folder `AvatarGen` so that the folder structure should look like
+Download the pretrained weights and other required data [here](https://1drv.ms/u/s!AjLpFg-f48ljgZl9qpU7_6ZA9B7qwA?e=pPcHIG). Put them in the folder `AvatarGen` so that the folder structure should look like
 
 ```
 ./
@@ -130,7 +130,7 @@ Download the pretrained weights and other required data [here](). Put them in th
 
 ### Coarse Shape Generation
 
-Folder `AvatarGen/ShapeGen` contains codes for this part. Run the follow command to generate the coarse shape corresponding to the shape description 'a strong man'. We recommend to use the prompt augmentation 'a 3d rendering of ... in unreal engine' for better results. The generated coarse body mesh will be stored under `AvatarGen/ShapeGen/output/coarse_shape`.
+Folder `AvatarGen/ShapeGen` contains codes for this part. Run the follow command to generate the coarse shape corresponding to the shape description 'a strong man'. We recommend to use the prompt augmentation 'a 3d rendering of xxx in unreal engine' for better results. The generated coarse body mesh will be stored under `AvatarGen/ShapeGen/output/coarse_shape`.
 
 ```bash
 python main.py --target_txt 'a 3d rendering of a strong man in unreal engine'
@@ -151,6 +151,15 @@ python main.py --mode train_clip --conf confs/examples/abrahamlincoln.conf
 ```
 
 Results will be stored in `AvatarCLIP/AvatarGen/AppearanceGen/exp/smpl/examples/abrahamlincoln`.
+
+If you wish to perform shape sculpting and texture generation on the previously generated coarse shape. We also provide example config files in `confs/base_models/astrongman.conf` `confs/astrongman/*.conf`. Two steps of optimization are required as follows.
+
+```bash
+# Initilization of the implicit avatar
+python main.py --mode train --conf confs/base_models/astrongman.conf
+# Shape sculpting and texture generation on the initialized implicit avatar
+python main.py --mode train_clip --conf confs/astrongman/hulk.conf
+```
 
 ### Marching Cube
 

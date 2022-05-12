@@ -107,6 +107,7 @@ def shape_gen(smpl_args, AE_path_fname, codebook_fname, neutral_txt, target_txt)
     _beta_zero = torch.zeros([1, 16]).cuda()
     v = model_AE.decode(_beta_zero.detach())
     f = smpl_model.faces
+    zero_beta_v = v.clone()
     images, detached_images, steady_image = render_one_batch(v, f)
     images = F.interpolate(images, size=224)
     images -= torch.from_numpy(np.array([0.48145466, 0.4578275, 0.40821073])).reshape(1, 3, 1, 1).cuda()
@@ -119,7 +120,7 @@ def shape_gen(smpl_args, AE_path_fname, codebook_fname, neutral_txt, target_txt)
     
     v = model_AE.decode(codebook[best_one].reshape(1, 16)).detach().cpu().numpy()
     f = smpl_model.faces
-    return v.reshape(-1, 3), f
+    return v.reshape(-1, 3), f, zero_beta_v.detach().cpu().numpy().reshape(-1, 3)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -139,7 +140,7 @@ if __name__ == '__main__':
     }
 
     print("Start generating coarse body shape given the target text: {}".format(args.target_txt))
-    v, f = shape_gen(smpl_args, args.AE_path_fname, args.codebook_fname, \
+    v, f, zero_beta_v = shape_gen(smpl_args, args.AE_path_fname, args.codebook_fname, \
                      args.neutral_txt, args.target_txt)
     if not os.path.exists(args.output_folder):
         os.makedirs(args.output_folder, exist_ok=True)

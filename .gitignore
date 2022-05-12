@@ -4,3 +4,6 @@ exp
 smpl_models
 AvatarGen/ShapeGen/data
 AvatarGen/ShapeGen/output
+pretrained_models
+avatarclip_data
+avatarclip_data.zip

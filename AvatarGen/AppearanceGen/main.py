@@ -56,6 +56,7 @@ class Runner:
         self.use_white_bkgd = self.conf.get_bool('train.use_white_bkgd')
         self.warm_up_end = self.conf.get_float('train.warm_up_end', default=0.0)
         self.anneal_end = self.conf.get_float('train.anneal_end', default=0.0)
+        self.max_ray_num = self.conf.get_int('train.max_ray_num', default=112 * 112)
 
         # Weights
         self.igr_weight = self.conf.get_float('train.igr_weight')
@@ -359,7 +360,7 @@ class Runner:
             ori_mask = ori_mask[..., 0]
 
             if self.use_silhouettes:
-                rays_o, rays_d, W, dilated_mask = self.dataset.gen_rays_silhouettes(torch.from_numpy(pose).cuda(), 112 * 112, ori_mask)
+                rays_o, rays_d, W, dilated_mask = self.dataset.gen_rays_silhouettes(torch.from_numpy(pose).cuda(), self.max_ray_num, ori_mask)
                 H = W
                 rays_o = rays_o.float()
                 rays_d = rays_d.float()

@@ -57,6 +57,16 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
 ## Citation
 If you find our work useful for your research, please consider citing the paper:
 ```
+@article{hong2022avatarclip,
+    title={AvatarCLIP: Zero-Shot Text-Driven Generation and Animation of 3D Avatars},
+    author={Hong, Fangzhou and Zhang, Mingyuan and Pan, Liang and Cai, Zhongang and Yang, Lei and Liu, Ziwei},
+    journal={ACM Transactions on Graphics (TOG)},
+    volume={41},
+    number={4},
+    pages={1--19},
+    year={2022},
+    publisher={ACM New York, NY, USA}
+}
 ```
 
 ## Updates

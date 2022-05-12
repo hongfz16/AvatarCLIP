@@ -4,7 +4,7 @@
 
 <div>
     <a href='https://hongfz16.github.io/' target='_blank'>Fangzhou Hong</a><sup>1</sup>*&emsp;
-    Mingyuang Zhang<sup>1</sup>*&emsp;
+    Mingyuan Zhang<sup>1</sup>*&emsp;
     Liang Pan<sup>1</sup>&emsp;
     <a href='https://caizhongang.github.io/' target='_blank'>Zhongang Cai</a><sup>1,2,3</sup>&emsp;
     <a href='https://yanglei.me/' target='_blank'>Lei Yang</a><sup>2</sup>&emsp;

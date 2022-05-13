@@ -72,9 +72,11 @@ If you find our work useful for your research, please consider citing the paper:
     journal={ACM Transactions on Graphics (TOG)},
     volume={41},
     number={4},
+    articleno={161},
     pages={1--19},
     year={2022},
-    publisher={ACM New York, NY, USA}
+    publisher={ACM New York, NY, USA},
+    doi={10.1145/3528223.3530094},
 }
 ```
 
@@ -82,11 +84,11 @@ If you find our work useful for your research, please consider citing the paper:
 
 ### Download
 
-Go visit our [project page](https://hongfz16.github.io/projects/AvatarCLIP.html). Go to the section avatar gallery. Pick a model that you like. Click 'Load Model' below. Click 'Download FBX' link at the bottom of the pop-up viewer.
+Go visit our [project page](https://hongfz16.github.io/projects/AvatarCLIP.html). Go to the section 'Avatar Gallery'. Pick a model you like. Click 'Load Model' below. Click 'Download FBX' link at the bottom of the pop-up viewer.
 
 <img src='./assets/download_fbx.jpg' width='50%'>
 
-### Any 3D software you like (e.g. Blender, Unity3D)
+### Import to Your Favourite 3D Software (e.g. Blender, Unity3D)
 
 The FBX models are already rigged. Use your motion library to animate it!
 
@@ -94,7 +96,7 @@ The FBX models are already rigged. Use your motion library to animate it!
 
 <img src='./assets/blender_motion.gif' width='50%'>
 
-### Mixamo
+### Upload to Mixamo
 
 To make use of the rich motion library provided by [Mixamo](https://www.mixamo.com), you can also upload the FBX model to Mixamo. The rigging process is completely automatic!
 
@@ -102,7 +104,7 @@ To make use of the rich motion library provided by [Mixamo](https://www.mixamo.c
 
 ## Installation
 
-We recommend using anaconda to manage the python environment. The setup commands below are provided for you reference.
+We recommend using anaconda to manage the python environment. The setup commands below are provided for your reference.
 
 ```bash
 git clone https://github.com/hongfz16/AvatarCLIP.git
@@ -204,7 +206,7 @@ The final high resolution mesh will be stored as `AvatarCLIP/AvatarGen/Appearanc
 
 ## Convert Avatar to FBX Format
 
-See the instructions [here](./Avatar2FBX/README.md).
+For the convenience of using the generated avatar with modern graphics pipeline, we also provide scripts to rig the avatar and convert to FBX format. See the instructions [here](./Avatar2FBX/README.md).
 
 
 ## Motion Generation

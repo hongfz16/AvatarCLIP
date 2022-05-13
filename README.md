@@ -79,7 +79,7 @@ conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=10
 pip install -r requirements.txt
 ```
 
-Other than the above steps, you should also install [neural_renderer](https://github.com/hiroharu-kato/neural_renderer) following its instructions. Before compiling neural_renderer (or after compiling should also be fine), remember to add the following three lines to `neural_renderer/perspective.py` after line 17.
+Other than the above steps, you should also install [neural_renderer](https://github.com/daniilidis-group/neural_renderer) following its instructions. Before compiling neural_renderer (or after compiling should also be fine), remember to add the following three lines to `neural_renderer/perspective.py` after line 19.
 
 ```python
 x[z<=0] = 0

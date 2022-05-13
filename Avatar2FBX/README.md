@@ -7,7 +7,7 @@ Convert SMPL-like Avatar to FBX format.
 - For scientific research purpose only bounded by license: https://smpl-x.is.tue.mpg.de/modellicense
 
 ## TODO
-- [ ] Support t-pose.
+- [ ] Support any pose and any beta SMPL models.
 - [ ] Add animation.
 
 ## Usage
@@ -43,4 +43,4 @@ sys.path.append('/path/to/fbxsdk/FBX202031_FBXPYTHONSDK_LINUX/lib/Python37_x64')
 ### 4. Convert models
 - Add all of your `.ply` files in the folder: `meshes`
 - Run the script `export_fbx.py`, the output fbx models will be saved into the folder: `outputs`.
-- Note that we currently only supports 'stand pose'.
+- Note that we currently only supports 'stand pose' and 'zero beta'.

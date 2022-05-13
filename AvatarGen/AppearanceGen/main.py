@@ -261,7 +261,7 @@ class Runner:
             self.clip_normalizer
         ])
         self.resize = transforms.RandomResizedCrop(224, scale=(1, 1))
-        self.random_perspective = transforms.RandomPerspective(p=0.8, distortion_scale=0.5)
+        self.random_perspective = transforms.RandomPerspective(p=0, distortion_scale=0.5) #p=0.8 might trigger some strange bug of randomperspective
 
         def add_noise(v, mean, std):
             tmp = torch.zeros_like(v)
@@ -551,8 +551,8 @@ class Runner:
                 self.save_checkpoint()
 
             if self.iter_step % self.val_freq == 0:
-                self.validate_image(idx = idx_counter)
-                idx_counter = (idx_counter + 1) % self.dataset.n_images
+                self.validate_image(idx = 58)
+                # idx_counter = (idx_counter + 1) % self.dataset.n_images
 
             if self.iter_step % self.val_mesh_freq == 0:
                 self.validate_mesh()

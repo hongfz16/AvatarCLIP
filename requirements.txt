@@ -1,5 +1,5 @@
 trimesh==3.9.8
-numpy==1.19.2
+numpy==1.21.0
 pyhocon==0.3.57
 icecream==2.1.0
 opencv_python==4.5.2.52

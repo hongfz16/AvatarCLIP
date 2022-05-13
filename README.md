@@ -4,7 +4,7 @@
 
 <div>
     <a href='https://hongfz16.github.io/' target='_blank'>Fangzhou Hong</a><sup>1</sup>*&emsp;
-    Mingyuang Zhang<sup>1</sup>*&emsp;
+    Mingyuan Zhang<sup>1</sup>*&emsp;
     Liang Pan<sup>1</sup>&emsp;
     <a href='https://caizhongang.github.io/' target='_blank'>Zhongang Cai</a><sup>1,2,3</sup>&emsp;
     <a href='https://yanglei.me/' target='_blank'>Lei Yang</a><sup>2</sup>&emsp;
@@ -57,6 +57,16 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
 ## Citation
 If you find our work useful for your research, please consider citing the paper:
 ```
+@article{hong2022avatarclip,
+    title={AvatarCLIP: Zero-Shot Text-Driven Generation and Animation of 3D Avatars},
+    author={Hong, Fangzhou and Zhang, Mingyuan and Pan, Liang and Cai, Zhongang and Yang, Lei and Liu, Ziwei},
+    journal={ACM Transactions on Graphics (TOG)},
+    volume={41},
+    number={4},
+    pages={1--19},
+    year={2022},
+    publisher={ACM New York, NY, USA}
+}
 ```
 
 ## Updates

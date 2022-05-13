@@ -48,11 +48,20 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
   <a href="https://hongfz16.github.io/projects/AvatarCLIP.html" target='_blank'>[Project Page]</a> •
   <a href="" target='_blank'>[arXiv]</a> •
   <a href="" target='_blank'>[High-Res PDF]</a> •
-  <a href="" target='_blank'>[Supplementary Video]</a> •
-  <a href="" target='_blank'>[Colab Demo]</a>
+  <a href="https://youtu.be/-l2ZMeoASGY" target='_blank'>[Supplementary Video]</a> •
+  <a href="https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing" target='_blank'>[Colab Demo]</a>
 </h3>
 
 </div>
+
+## Updates
+[05/2022] Add a [Colab Demo](https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing) for avatar generation! [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing)
+
+[05/2022] Support converting the generated avatar to the **animatable FBX format**! Go checkout [how to use the FBX models](#use-generated-fbx-models). Or checkout the [instructions](./Avatar2FBX/README.md) for the conversion codes.
+
+[05/2022] Code release for avatar generation part!
+
+[04/2022] AvatarCLIP is accepted to SIGGRAPH 2022 (Journal Track):partying_face:!
 
 ## Citation
 If you find our work useful for your research, please consider citing the paper:
@@ -69,12 +78,27 @@ If you find our work useful for your research, please consider citing the paper:
 }
 ```
 
-## Updates
-[05/2022] Support converting the generated avatar to the **animatable FBX format**! Go checkout [Avatar Gallery](https://hongfz16.github.io/projects/AvatarCLIP.html) to download the converted FBX models (Avatar Gallery -> load model -> Download FBX). Or checkout the [instructions](./Avatar2FBX/README.md) for the usage.
+## Use Generated FBX Models
 
-[05/2022] Code release for avatar generation part!
+### Download
 
-[04/2022] AvatarCLIP is accepted to SIGGRAPH 2022 (Journal Track):partying_face:!
+Go visit our [project page](https://hongfz16.github.io/projects/AvatarCLIP.html). Go to the section avatar gallery. Pick a model that you like. Click 'Load Model' below. Click 'Download FBX' link at the bottom of the pop-up viewer.
+
+<img src='./assets/download_fbx.jpg' width='50%'>
+
+### Any 3D software you like (e.g. Blender, Unity3D)
+
+The FBX models are already rigged. Use your motion library to animate it!
+
+<img src='./assets/blender_tpose.png' width='50%'>
+
+<img src='./assets/blender_motion.gif' width='50%'>
+
+### Mixamo
+
+To make use of the rich motion library provided by [Mixamo](https://www.mixamo.com), you can also upload the FBX model to Mixamo. The rigging process is completely automatic!
+
+<img src='./assets/mixamo_motion.gif' width='50%'>
 
 ## Installation
 
@@ -115,24 +139,19 @@ Register and download SMPL models [here](https://smpl.is.tue.mpg.de/). Put the d
 ```
 
 ### Download Pretrained Models & Other Data
-Download the pretrained weights and other required data [here](https://1drv.ms/u/s!AjLpFg-f48ljgZl9qpU7_6ZA9B7qwA?e=pPcHIG). Put them in the folder `AvatarGen` so that the folder structure should look like
+This download is only for coarse shape generation. You can skip if you only want to use other parts. Download the pretrained weights and other required data [here](https://1drv.ms/u/s!AjLpFg-f48ljgZl9qpU7_6ZA9B7qwA?e=pPcHIG). Put them in the folder `AvatarGen` so that the folder structure should look like
 
 ```
 ./
 ├── ...
 └── AvatarGen/
-    ├── AppearanceGen/
-    |   ├── pretrained_models/
-    |       └── zero_beta_stand_pose.pth
-    └── AppearanceGen/
-        ├── data/
-        |   ├── codebook.pth
-        |   ├── model_VAE_16.pth
-        |   ├── nongrey_male_0110.jpg
-        |   ├── smpl_uv.mtl
-        |   └── smpl_uv.obj
-        └── output/
-            └── stand_pose.npy
+    └── ShapeGen/
+        └── data/
+            ├── codebook.pth
+            ├── model_VAE_16.pth
+            ├── nongrey_male_0110.jpg
+            ├── smpl_uv.mtl
+            └── smpl_uv.obj
 ```
 
 
@@ -154,7 +173,7 @@ python render.py --coarse_shape_obj output/coarse_shape/a_3d_rendering_of_a_stro
 
 ### Shape Sculpting and Texture Generation
 
-Note that all the codes are tested on NVIDIA V100 (32GB memory). Therefore, in order to run on GPUs with lower memory, please try to scale down the network or tune down `max_ray_num` in the config files. You can refer to our colab demo for a scale-down version of AvatarCLIP.
+Note that all the codes are tested on NVIDIA V100 (32GB memory). Therefore, in order to run on GPUs with lower memory, please try to scale down the network or tune down `max_ray_num` in the config files. You can refer to `confs/examples_small/example.conf` or our [colab demo](https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing) for a scale-down version of AvatarCLIP.
 
 Folder `AvatarGen/AppearanceGen` contains codes for this part. We provide data, pretrained model and scripts to perform shape sculpting and texture generation on a zero-beta body (mean shape defined by SMPL). We provide many example scripts under `AvatarGen/AppearanceGen/confs/examples`. For example, if we want to generate 'Abraham Lincoln', which is defined in the config file `confs/examples/abrahamlincoln.conf`, use the following command.
 

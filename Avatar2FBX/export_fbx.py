@@ -65,14 +65,14 @@ if __name__ == "__main__":
         smpl_model = init_smpl_model(model_dir)
         template_object, pose_rot, beta = load_template_smpl(smpl_model, os.path.join(pose_dir, 'stand_pose.npy'))
         joints = template_object['joints'].squeeze().cpu().numpy()
-        # Select first 24 joints?
+        # Select first 24 joints
         joints = joints[:24, :]
 
         nearest_ind = find_nearest_ind(rot_vertices, template_object)
         smpl_blend_weights = smpl_model.lbs_weights
         mesh_blend_weights = torch.gather(smpl_blend_weights, 0, torch.from_numpy(nearest_ind).unsqueeze(-1).repeat(1, smpl_blend_weights.shape[-1]))
 
-        # rotate to initial orientation
+        # rotate back to initial orientation
         vertices = ori_vertices
         joints = np.matmul(
             joints,
@@ -111,8 +111,6 @@ if __name__ == "__main__":
     # ==============================================================================
     # Convert to FBX
     # ==============================================================================
-    # print("\n\nGenerating fbx files...... \n")
-    # for smpl_object in tqdm(smpl_objects):
 
         # Prepare the FBX SDK
         (lSdkManager, lScene) = FbxCommon.InitializeSdkObjects()
@@ -128,7 +126,7 @@ if __name__ == "__main__":
         lSdkManager.GetIOSettings().SetBoolProp(EXP_FBX_EMBEDDED, True)
         lFileFormat = lSdkManager.GetIOPluginRegistry().GetNativeWriterFormat()
 
-        # Save the scene.
+        # Save the scene
         lResult = FbxCommon.SaveScene(lSdkManager, lScene, os.path.join(save_dir, f"{smpl_object['name']}.fbx"))
 
         if lResult == False:
@@ -136,5 +134,5 @@ if __name__ == "__main__":
             lSdkManager.Destroy()
             continue
 
-        # Destroy all objects created by the FBX SDK.
+        # Destroy all objects created by the FBX SDK
         lSdkManager.Destroy()

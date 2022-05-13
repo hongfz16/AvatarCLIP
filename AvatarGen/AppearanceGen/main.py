@@ -28,16 +28,19 @@ import imageio
 to8b = lambda x : (255*np.clip(x,0,1)).astype(np.uint8)
 
 class Runner:
-    def __init__(self, conf_path, mode='train', case='CASE_NAME', is_continue=False):
+    def __init__(self, conf_path, mode='train', case='CASE_NAME', is_continue=False, is_colab=False, conf=None):
         self.device = torch.device('cuda')
-
-        # Configuration
         self.conf_path = conf_path
-        f = open(self.conf_path)
-        conf_text = f.read()
-        f.close()
 
-        self.conf = ConfigFactory.parse_string(conf_text)
+        if is_colab:
+            self.conf = conf
+        else:
+            # Configuration
+            f = open(self.conf_path)
+            conf_text = f.read()
+            f.close()
+            self.conf = ConfigFactory.parse_string(conf_text)
+
         self.base_exp_dir = self.conf['general.base_exp_dir']
         os.makedirs(self.base_exp_dir, exist_ok=True)
         self.dataset = SMPL_Dataset(self.conf['dataset'])

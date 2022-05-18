@@ -204,7 +204,6 @@ def CreateSkeleton(pSdkManager, pName, smpl_object):
     lSkeletonRootAttribute.Size.Set(JointsSize)
     lSkeletonRoot = FbxNode.Create(pSdkManager, Num2Joints[0])
     lSkeletonRoot.SetNodeAttribute(lSkeletonRootAttribute)
-    # rootInfo = jointsLoc.readline().split(" ")
     # lSkeletonRoot.LclRotation.Set(FbxDouble3(float(Num2Rot[0][0]), float(Num2Rot[0][1]), float(Num2Rot[0][2])))
     # lSkeletonRoot.LclTranslation.Set(inv_fbxdouble3([float(joints[0, 0]), float(joints[0, 1]), float(joints[0, 2])], Inv_Num2Rot[0]))
     lSkeletonRoot.LclTranslation.Set(FbxDouble3(float(joints[0, 0]), float(joints[0, 1]), float(joints[0, 2])))
@@ -281,14 +280,13 @@ def AddShape(pScene, node, smpl_object):
 
     lBlendShape = FbxBlendShape.Create(pScene, "BlendShapes")
 
-    # shapeInfo = open("vertexLoc.txt", "r")
     for j in range(0, 1):
         lBlendShapeChannel = FbxBlendShapeChannel.Create(pScene, "ShapeChannel"+str(j))
         lShape = FbxShape.Create(pScene, "Shape"+str(j))
         lShape.InitControlPoints(len(verticies))
         for i in range(0, len(verticies)):
             ctrlPInfo = verticies[i]
-            lShape.SetControlPointAt(FbxVector4(0, 0, 0), i) # ???????????
+            lShape.SetControlPointAt(FbxVector4(0, 0, 0), i) # (?) Align with Smplx2FBX. To be further investigated.
         lBlendShapeChannel.AddTargetShape(lShape)
         lBlendShape.AddBlendShapeChannel(lBlendShapeChannel)
     node.GetMesh().AddDeformer(lBlendShape)
@@ -298,10 +296,10 @@ def CreateScene(pSdkManager, pScene, smpl_object):
     # Create scene info
     lSceneInfo = FbxDocumentInfo.Create(pSdkManager, "SceneInfo")
     lSceneInfo.mTitle = "SMPL"
-    lSceneInfo.mSubject = "SMPL model with weighted skin"
+    lSceneInfo.mSubject = "Human SMPL model with weighted skin"
     lSceneInfo.mAuthor = "MMLab@NTU"
     lSceneInfo.mRevision = "rev. 1.0"
-    lSceneInfo.mKeywords = "weighted skin"
+    lSceneInfo.mKeywords = "human smpl weighted"
     lSceneInfo.mComment = "N/A"
     pScene.SetSceneInfo(lSceneInfo)
 
@@ -315,11 +313,8 @@ def CreateScene(pSdkManager, pScene, smpl_object):
     pScene.GetRootNode().AddChild(lMeshNode)
     pScene.GetRootNode().AddChild(lSkeletonRoot)
 
-    # weightsInfo = open("SkinWeights.txt", "r")
-    # for i in range(0, 55):
-    #     SkeletonWeights.append(weightsInfo.readline())
     lSkin = FbxSkin.Create(pSdkManager, "")
 
     LinkMeshToSkeleton(pSdkManager, lMeshNode, lSkin, smpl_object, nodeDict)
-    AddShape(pScene, lMeshNode, smpl_object)  # might be redundant!!!
+    AddShape(pScene, lMeshNode, smpl_object)  # Might be redundant!
     # AnimateSkeleton(pSdkManager, pScene, lSkeletonRoot)

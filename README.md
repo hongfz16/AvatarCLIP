@@ -46,8 +46,8 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
 
 <h3 align="center">
   <a href="https://hongfz16.github.io/projects/AvatarCLIP.html" target='_blank'>[Project Page]</a> •
-  <a href="" target='_blank'>[arXiv]</a> •
-  <a href="" target='_blank'>[High-Res PDF]</a> •
+  <a href="https://arxiv.org/abs/2205.08535" target='_blank'>[arXiv]</a> •
+  <a href="" target='_blank'>[High-Res PDF (166M)]</a> •
   <a href="https://youtu.be/-l2ZMeoASGY" target='_blank'>[Supplementary Video]</a> •
   <a href="https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing" target='_blank'>[Colab Demo]</a>
 </h3>

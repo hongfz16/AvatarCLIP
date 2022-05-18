@@ -47,7 +47,7 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
 <h3 align="center">
   <a href="https://hongfz16.github.io/projects/AvatarCLIP.html" target='_blank'>[Project Page]</a> •
   <a href="https://arxiv.org/abs/2205.08535" target='_blank'>[arXiv]</a> •
-  <a href="" target='_blank'>[High-Res PDF (166M)]</a> •
+  <a href="https://drive.google.com/file/d/1_-5JIWyRCF7osAVWQ-z01nme4NxBTtrC/view?usp=sharing" target='_blank'>[High-Res PDF (166M)]</a> •
   <a href="https://youtu.be/-l2ZMeoASGY" target='_blank'>[Supplementary Video]</a> •
   <a href="https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing" target='_blank'>[Colab Demo]</a>
 </h3>
@@ -55,6 +55,8 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
 </div>
 
 ## Updates
+[05/2022] [Paper](https://arxiv.org/abs/2205.08535) uploaded to arXiv. [![arXiv](https://img.shields.io/badge/arXiv-2205.08535-b31b1b.svg)](https://arxiv.org/abs/2205.08535)
+
 [05/2022] Add a [Colab Demo](https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing) for avatar generation! [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing)
 
 [05/2022] Support converting the generated avatar to the **animatable FBX format**! Go checkout [how to use the FBX models](#use-generated-fbx-models). Or checkout the [instructions](./Avatar2FBX/README.md) for the conversion codes.

@@ -4,8 +4,8 @@
 
 <div>
     <a href='https://hongfz16.github.io/' target='_blank'>Fangzhou Hong</a><sup>1</sup>*&emsp;
-    Mingyuan Zhang<sup>1</sup>*&emsp;
-    Liang Pan<sup>1</sup>&emsp;
+    <a href='https://scholar.google.com/citations?user=2QLD4fAAAAAJ&hl=en' target='_blank'>Mingyuan Zhang</a><sup>1</sup>*&emsp;
+    <a href='https://scholar.google.com/citations?user=lSDISOcAAAAJ&hl=zh-CN' target='_blank'>Liang Pan</a><sup>1</sup>&emsp;
     <a href='https://caizhongang.github.io/' target='_blank'>Zhongang Cai</a><sup>1,2,3</sup>&emsp;
     <a href='https://yanglei.me/' target='_blank'>Lei Yang</a><sup>2</sup>&emsp;
     <a href='https://liuziwei7.github.io/' target='_blank'>Ziwei Liu</a><sup>1+</sup>
@@ -227,6 +227,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <p><a href="https://arxiv.org/abs/2112.03221">Text2Mesh</a> proposes to edit a template mesh by predicting offsets and colors per vertex using CLIP and differentiable rendering.</p>
 <p><a href="https://arxiv.org/abs/2112.05139">CLIP-NeRF</a> can manipulate 3D objects represented by NeRF with natural languages or examplar images by leveraging CLIP.</p>
 <p><a href="https://arxiv.org/abs/2203.13333">Text to Mesh</a> facilitates zero-shot text-driven general mesh generation by deforming from a sphere mesh guided by CLIP.</p>
+<p><a href='https://github.com/GuyTevet/MotionCLIP'>MotionCLIP</a> establishes a projection from CLIP text space to motion space through supervised training to achieve amazing text-driven motion generation results.</p>
 
 ## Acknowledgements
 

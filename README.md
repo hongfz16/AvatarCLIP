@@ -44,13 +44,13 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
 
 ---
 
-<h3 align="center">
+<h4 align="center">
   <a href="https://hongfz16.github.io/projects/AvatarCLIP.html" target='_blank'>[Project Page]</a> •
   <a href="https://arxiv.org/abs/2205.08535" target='_blank'>[arXiv]</a> •
   <a href="https://drive.google.com/file/d/1_-5JIWyRCF7osAVWQ-z01nme4NxBTtrC/view?usp=sharing" target='_blank'>[High-Res PDF (166M)]</a> •
   <a href="https://youtu.be/-l2ZMeoASGY" target='_blank'>[Supplementary Video]</a> •
   <a href="https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing" target='_blank'>[Colab Demo]</a>
-</h3>
+</h4>
 
 </div>
 
@@ -88,21 +88,21 @@ If you find our work useful for your research, please consider citing the paper:
 
 Go visit our [project page](https://hongfz16.github.io/projects/AvatarCLIP.html). Go to the section 'Avatar Gallery'. Pick a model you like. Click 'Load Model' below. Click 'Download FBX' link at the bottom of the pop-up viewer.
 
-<img src='./assets/download_fbx.jpg' width='50%'>
+<img src='./assets/download_fbx.jpg' width='60%'>
 
 ### Import to Your Favourite 3D Software (e.g. Blender, Unity3D)
 
 The FBX models are already rigged. Use your motion library to animate it!
 
-<img src='./assets/blender_tpose.png' width='50%'>
+<img src='./assets/blender_tpose.png' width='60%'>
 
-<img src='./assets/blender_motion.gif' width='50%'>
+<img src='./assets/blender_motion.gif' width='100%'>
 
 ### Upload to Mixamo
 
 To make use of the rich motion library provided by [Mixamo](https://www.mixamo.com), you can also upload the FBX model to Mixamo. The rigging process is completely automatic!
 
-<img src='./assets/mixamo_motion.gif' width='50%'>
+<img src='./assets/mixamo_motion.gif' width='100%'>
 
 ## Installation
 
@@ -227,7 +227,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <p><a href="https://arxiv.org/abs/2112.03221">Text2Mesh</a> proposes to edit a template mesh by predicting offsets and colors per vertex using CLIP and differentiable rendering.</p>
 <p><a href="https://arxiv.org/abs/2112.05139">CLIP-NeRF</a> can manipulate 3D objects represented by NeRF with natural languages or examplar images by leveraging CLIP.</p>
 <p><a href="https://arxiv.org/abs/2203.13333">Text to Mesh</a> facilitates zero-shot text-driven general mesh generation by deforming from a sphere mesh guided by CLIP.</p>
-<p><a href='https://github.com/GuyTevet/MotionCLIP'>MotionCLIP</a> establishes a projection from CLIP text space to motion space through supervised training to achieve amazing text-driven motion generation results.</p>
+<p><a href='https://github.com/GuyTevet/MotionCLIP'>MotionCLIP</a> establishes a projection from the CLIP text space to the motion space through supervised training, which leads to amazing text-driven motion generation results.</p>
 
 ## Acknowledgements
 

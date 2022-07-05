@@ -55,6 +55,8 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
 </div>
 
 ## Updates
+[07/2022] Code release for motion generation part!
+
 [05/2022] [Paper](https://arxiv.org/abs/2205.08535) uploaded to arXiv. [![arXiv](https://img.shields.io/badge/arXiv-2205.08535-b31b1b.svg)](https://arxiv.org/abs/2205.08535)
 
 [05/2022] Add a [Colab Demo](https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing) for avatar generation! [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1dfaecX7xF3nP6fyXc8XBljV5QY1lc1TR?usp=sharing)
@@ -127,6 +129,12 @@ z[z<=0] = 0
 
 This quick fix is for a rendering issue where objects behide the camera will also be rendered. Be careful when using this fixed version of neural_renderer on your other projects, because this fix will cause the rendering process not differentiable.
 
+To support offscreen rendering for motion visualization, you should install osmesa library.
+
+```bash
+conda install -c menpo osmesa
+```
+
 ## Data Preparation
 
 ### Download SMPL Models
@@ -143,7 +151,7 @@ Register and download SMPL models [here](https://smpl.is.tue.mpg.de/). Put the d
 ```
 
 ### Download Pretrained Models & Other Data
-This download is only for coarse shape generation. You can skip if you only want to use other parts. Download the pretrained weights and other required data [here](https://1drv.ms/u/s!AjLpFg-f48ljgZl9qpU7_6ZA9B7qwA?e=pPcHIG). Put them in the folder `AvatarGen` so that the folder structure should look like
+This download is only for coarse shape generation and motion generation. You can skip if you only want to use other parts. Download the pretrained weights and other required data [here](https://1drv.ms/u/s!AjLpFg-f48ljgZl9qpU7_6ZA9B7qwA?e=pPcHIG). Put them in the folder `AvatarGen` so that the folder structure should look like
 
 ```
 ./
@@ -158,6 +166,27 @@ This download is only for coarse shape generation. You can skip if you only want
             └── smpl_uv.obj
 ```
 
+
+Pretrained weights and human texture for motion generation can be downloaded [here](https://drive.google.com/drive/folders/1TSyeT8MwH5EVQRbNGRVkWsA4Y9Y6dRbk?usp=sharing). Note that the human texture we used to render poses is from [SURREAL dataset](https://www.di.ens.fr/willow/research/surreal/data/). Besides, you should download pretrained weights of [VPoser v2.0](https://smpl-x.is.tue.mpg.de/download.php). Put them in the folder `AvatarAnimate` so that the folder structure should look like
+
+```
+├── ...
+└── AvatarAnimate/
+    └── data/
+        ├── codebook.pth
+        ├── motion_vae.pth
+        ├── pose_realnvp.pth
+        ├── nongrey_male_0110.jpg
+        ├── smpl_uv.mtl
+        ├── smpl_uv.obj
+        └── vposer
+            ├── V02_05.log
+            ├── V02_05.yaml
+            └── snapshots
+                ├── V02_05_epoch=08_val_loss=0.03.ckpt
+                └── V02_05_epoch=13_val_loss=0.03.ckpt
+        
+```
 
 ## Avatar Generation
 
@@ -213,7 +242,112 @@ For the convenience of using the generated avatar with modern graphics pipeline,
 
 ## Motion Generation
 
-TBA
+### Candidate Poses Generation
+
+Here we provide four different methods for pose generation.
+
+1. PoseOptimizer: directly optimize on SMPL theta
+
+2. VPoserOptimizer: optimize the latent space of VPoser
+
+3. VPoserRealNVP: get latent codes of VPoser from pretrained conditional RealNVP
+
+4. VPoserCodebook: select the most similar poses to the given text feature
+
+
+We provide configurations to compare these methods. Here are some examples:
+
+```bash
+# Suppose your current location is `AvatarCLIP/AvatarAnimate`
+
+# Use PoseOptimizer method to generate poses for "arguing"
+python main.py --conf confs/pose_ablation/pose_optimizer/argue.conf
+# Results are stored in `AvatarCLIP/AvatarAnimate/exp/pose_ablation/pose_optimizer/argue` directory
+# candidate_0.jpg, candidate_1.jpg, ..., candidate_4.jpg are the top-5 poses
+# candidate_0.npy, candidate_1.npy, ..., candidate_4.npy are corresponding parameters
+
+# Use VPoserOptimizer method to generate poses for "praying"
+python main.py --conf confs/pose_ablation/vposer_optimizer/pray.conf
+# Results are stored in `AvatarCLIP/AvatarAnimate/exp/pose_ablation/vposer_optimizer/pray` directory
+
+# Use VPoserRealNVP method to generate poses for "shooting a basketball"
+python main.py --conf confs/pose_ablation/vposer_realnvp/shoot_basketball.conf
+# Results are stored in `AvatarCLIP/AvatarAnimate/exp/pose_ablation/vposer_realnvp/shoot_basketball` directory
+
+# Use VPoserCodebook method to generate poses for "running"
+python main.py --conf confs/pose_ablation/vposer_codebook/run.conf
+# Results are stored in `AvatarCLIP/AvatarAnimate/exp/pose_ablation/vposer_codebook/run` directory
+```
+
+### Motion Generation
+
+Here we provide three different methods for motion generation.
+
+1. MotionInterpolation: directly interpolate between given poses
+
+2. MotionOptimizer (baseline): optimize latent code of a pretrained VAE with a simple reconstruction loss
+
+3. MotionOptimizer (ours): optimize latent code of a pretrained VAE with weighted reconstruction loss, delta loss, and clip loss
+
+
+
+We provide configurations to compare these methods. Here are some examples:
+
+```bash
+# Suppose your current location is `AvatarCLIP/AvatarAnimate`
+
+# Use MotionInterpolation method to generate motion for "arguing"
+python main.py --conf confs/motion_ablation/interpolation/argue.conf
+# Results are stored in `AvatarCLIP/AvatarAnimate/exp/motion_ablation/interpolation/argue` directory
+# candidate_0.jpg, candidate_1.jpg, ..., candidate_4.jpg are the top-5 poses
+# candidate_0.npy, candidate_1.npy, ..., candidate_4.npy are corresponding parameters
+# motion.mp4 is the generated motion
+# motion.npy is corresponding parameters
+
+# Use MotionOptimizer (baseline) method to generate motion for "praying"
+python main.py --conf confs/motion_ablation/baseline/pray.conf
+# Results are stored in `AvatarCLIP/AvatarAnimate/exp/motion_ablation/baseline/pray` directory
+
+# Use MotionOptimizer (ours) method to generate motion for "shooting a basketball"
+python main.py --conf confs/motion_ablation/motion_optimizer/shoot_basketball.conf
+# Results are stored in `AvatarCLIP/AvatarAnimate/exp/motion_ablation/motion_optimizer/shoot_basketball` directory
+```
+
+### Make your own configure
+
+Each configuration contains three independent parts: general setting, pose generator, and motion generator.
+
+```text
+# General Setting
+general {
+    # describe the results path
+    base_exp_dir = ./exp/motion_ablation/motion_optimizer/raise_arms
+
+    # if you only want to generate poses, then you can set "mode = pose".
+    mode = motion
+
+    # define your prompt. We highly recommend using the format "a rendered 3d man is xxx"
+    text = a rendered 3d man is raising both arms
+}
+
+# Pose Generator
+pose_generator {
+    type = VPoserCodebook
+    # you can change the number of candidate poses by setting "topk = 10"
+    # for PoseOptimizer and VPoserOptimizer, you can further define the number of iterations and the optimizer type
+}
+
+# Motion Generator
+# if "mode = pose", you can ignore this part
+motion_generator {
+    type = MotionOptimizer
+    # you can further modify the coefficient of each loss. 
+    # for example, if you find the generated motion is very intensive, you can reduce the coefficient of delta loss.
+}
+
+
+```
+
 
 
 ## License

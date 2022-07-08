@@ -12,3 +12,8 @@ tqdm
 git+https://github.com/openai/CLIP.git
 smplx[all]
 chumpy
+dotmap
+PyYAML
+git+https://github.com/mingyuan-zhang/neural_renderer.git
+git+https://github.com/nghorbani/human_body_prior.git
+git+https://github.com/nghorbani/body_visualizer.git

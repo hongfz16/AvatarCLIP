@@ -55,6 +55,8 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
 </div>
 
 ## Updates
+[09/2022] :fire::fire::fire:**If you are looking for a higher-quality text2motion method, go checkout our new work [MotionDiffuse](https://mingyuan-zhang.github.io/projects/MotionDiffuse.html)!**:fire::fire::fire:
+
 [07/2022] Code release for motion generation part!
 
 [05/2022] [Paper](https://arxiv.org/abs/2205.08535) uploaded to arXiv. [![arXiv](https://img.shields.io/badge/arXiv-2205.08535-b31b1b.svg)](https://arxiv.org/abs/2205.08535)

@@ -55,6 +55,8 @@ This repository contains the official implementation of _AvatarCLIP: Zero-Shot T
 </div>
 
 ## Updates
+[09/2022] :fire::fire::fire:**If you are looking for a higher-quality 3D human generation method, go checkout our new work [EVA3D](https://hongfz16.github.io/projects/EVA3D.html)!**:fire::fire::fire:
+
 [09/2022] :fire::fire::fire:**If you are looking for a higher-quality text2motion method, go checkout our new work [MotionDiffuse](https://mingyuan-zhang.github.io/projects/MotionDiffuse.html)!**:fire::fire::fire:
 
 [07/2022] Code release for motion generation part!

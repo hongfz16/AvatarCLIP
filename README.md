@@ -356,7 +356,7 @@ motion_generator {
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the S-Lab License. See `LICENSE` for more information.
 
 
 ## Related Works
